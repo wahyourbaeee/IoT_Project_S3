@@ -1,0 +1,33 @@
+version: '3'
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mqtt-broker
+    ports:
+      -"1883:1883"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=wahyu
+      - DOCKER_INFLUXDB_INIT_PASSWORD=123
+      - DOCKER_INFLUXDB_INIT_ORG=iot
+      - DOCKER_INFLUXDB_INIT_BUCKET=kandang
+    volumes:
+      - ./influx-data:/var/lib/influxdb2
+  
+  flask:
+    build: ./flask_app
+    container_name: flask-dashboard
+    ports:
+      -"5000:5000"
+    depends_on:
+      - mosquitto
+      - influxdb

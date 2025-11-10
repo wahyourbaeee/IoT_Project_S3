@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Coop Dashboard</title>
+  <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <h2>🐔 Smart Coop Dashboard</h2>
+  <div>
+    <p>🌡 Temp: <span id="temp">--</span> °C</p>
+    <p>💧 Humidity: <span id="hum">--</span> %</p>
+    <p>🥣 Feed Level: <span id="feed">--</span></p>
+    <p>🚰 Water Level: <span id="water">--</span></p>
+  </div>
+
+  <button onclick="control('fan', 'on')">Fan ON</button>
+  <button onclick="control('fan', 'off')">Fan OFF</button>
+  <button onclick="control('lamp', 'on')">Lamp ON</button>
+  <button onclick="control('lamp', 'off')">Lamp OFF</button>
+
+  <canvas id="tempChart" height="100"></canvas>
+
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
